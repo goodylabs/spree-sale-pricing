@@ -32,6 +32,14 @@ Spree::Variant.class_eval do
     price_in(currency).on_sale?
   end
 
+  def original_price
+    a = self.id
+    currency = self.cost_currency
+    # currency = "EUR" # HARDCODED
+    b = Spree::Price.where(:variant_id => a).where(:currency => currency).first.amount
+    return b
+  end
+
   def original_price_in(currency)
     Spree::Price.new variant_id: self.id, currency: currency, amount: price_in(currency).original_price
   end

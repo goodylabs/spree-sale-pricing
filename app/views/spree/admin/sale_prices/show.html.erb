@@ -1,0 +1,35 @@
+<%#= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1>Editing sale</h1>
+
+<%= form_for @sale_price, :url => object_url, :html => { :method => :put } do |f| %>
+  <table class="admin-report" width="545">
+    <tr>
+      <td valign="top">Product:</td>
+      <td><%= link_to "Show Product", admin_product_variant_path(@sale_price.variant.product_id) %></td>
+    </tr>
+    <tr>
+      <td valign="top">Currency:</td>
+      <td><%=@sale_price.currency%></td>
+    </tr>
+    <tr>
+      <td valign="top">Value:</td>
+      <td><%= f.text_field :value, {"style" => "width:500px"} %></td>
+    </tr>
+    <tr>
+      <td valign="top">Enabled:</td>
+      <td><%= f.check_box :enabled %></td>
+    </tr>
+    <tr>
+      <td valign="top">Start:</td>
+      <td><%= f.text_field :start_at %></td>
+    </tr>
+    <tr>
+      <td valign="top">End:</td>
+      <td><%= f.text_field :end_at %></td>
+    </tr>
+  </table>
+  <p>
+    <%= submit_tag "Update", {"class" => "wymupdate"} %> <%= t("or") %> <%= link_to t("cancel"), admin_sale_prices_path%>
+  </p>
+<% end %>

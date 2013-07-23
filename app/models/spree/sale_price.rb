@@ -14,10 +14,12 @@ module Spree
       where("enabled = 't' AND (start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)", Time.now, Time.now)
     }
 
-    # TODO make this work or remove it
-    #def self.calculators
-    #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
-    #end
+    attr_accessible :value, :start_at, :end_at, :enabled
+
+    # # TODO make this work or remove it
+    # #def self.calculators
+    # #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
+    # #end
 
     def calculator_type
       calculator.class.to_s if calculator
@@ -38,6 +40,18 @@ module Spree
 
     def disable
       update_attribute(:enabled, false)
+    end
+    
+    def original_price
+      Spree::Price.find(self.price_id)
+    end
+    
+    def variant
+      original_price.variant
+    end
+    
+    def currency
+      original_price.currency
     end
 
     def start(end_time = nil)

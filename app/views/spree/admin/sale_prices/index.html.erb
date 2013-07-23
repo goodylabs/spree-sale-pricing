@@ -1,0 +1,64 @@
+<% content_for :page_actions do %>  
+  <li><%= button_link_to "New Sale", new_object_url, :icon => 'icon-plus' %></li>
+<% end %>
+
+<% content_for :page_title do %>
+   Sales
+<% end %>
+
+<table class="index">
+  <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 10%" />
+    <col style="width: 10%" />
+    <col style="width: 10%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Currency</th>
+      <th>Selling for</th>
+      <th>Last price</th>
+      <th><%= Spree.t("static_content.link") %></th>
+      <th>Starts at</th>
+      <th>Ends</th>
+      <th>Active</th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id sale %>">
+        <td>
+          <%= sale.variant.product.name %>
+        </td>
+        <td>
+          <%= sale.currency %>
+        </td>
+        <td>
+          <%= sale.value %>
+        </td>
+        <td>
+          <%= sale.variant.original_price if sale.variant.original_price.present? %>
+        </td>
+        <td>
+          <%= link_to "Edit sale", admin_sale_price_path(sale.id) %>
+        </td>
+        <td>
+          <%= sale.start_at.to_date %>
+        </td>
+        <td>
+          <%= sale.end_at.to_date if sale.end_at.present? %>
+        </td>
+        <td class="align-center">
+          <%= content_tag(:i, '', :class => 'icon-ok green') if sale.enabled %>
+        </td>
+        <td  class="actions">
+          <%#= link_to_edit sale, :no_text => true %>
+          <%#= link_to_delete sale, :no_text => true %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

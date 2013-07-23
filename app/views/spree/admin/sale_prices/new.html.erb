@@ -1,0 +1,17 @@
+<%= form_for @sale_price, url: {action: "create"}, :html => { :method => :post } do |f| %>
+<table class="admin-report" width="545">
+    <tr>
+      <td valign="top">SALE PRICE:</td>
+      <td><%= f.text_field :value, {"style" => "width:500px"} %></td>
+    </tr>
+    <tr>
+      <%= f.hidden_field :price_id, :value => params[:price_id] %>
+    </tr>
+    <!-- <tr>
+      <td valign="top">Enabled:</td>
+      <td><%#= f.check_box :enabled %></td>
+    </tr> -->
+</table>
+<%= submit_tag "Create sale", {"class" => "wymupdate"} %> <%= t("or") %> <%= link_to t("cancel"), admin_sale_prices_path%>
+
+<% end %>
