@@ -6,7 +6,7 @@
   <table class="admin-report" width="545">
     <tr>
       <td valign="top">Product:</td>
-      <td><%= link_to "Show Product", admin_product_variant_path(@sale_price.variant.product_id) %></td>
+      <td><%= link_to @sale_price.variant.product.name, edit_admin_product_path(@sale_price.variant.product) %></td>
     </tr>
     <tr>
       <td valign="top">Currency:</td>

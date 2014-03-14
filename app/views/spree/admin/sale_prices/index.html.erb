@@ -1,5 +1,7 @@
-<% content_for :page_actions do %>  
+<% content_for :page_actions do %>
+<!-- 
   <li><%= button_link_to "New Sale", new_object_url, :icon => 'icon-plus' %></li>
+-->  
 <% end %>
 
 <% content_for :page_title do %>
@@ -31,7 +33,7 @@
     <% @sales.each do |sale| %>
       <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id sale %>">
         <td>
-          <%= sale.variant.product.name %>
+          <%= link_to sale.variant.product.name, edit_admin_product_path(sale.variant.product) %>
         </td>
         <td>
           <%= sale.currency %>
